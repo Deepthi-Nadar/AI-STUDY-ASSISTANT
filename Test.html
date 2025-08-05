@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Assistant</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <div class="logo">STUDIEE</div>
+        <a href="#" class="login-btn">LOGIN</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1 class="hero-title">AI STUDY ASSISTANT</h1>
+            <p class="hero-description">
+                Your personal smart assistant to make learning easy and fast.
+                Summarize long notes, generate quizzes, and get instant answers in one place.
+            </p>
+
+            <div class="feature-tags">
+                <span class="tag">✔ Summarize Notes</span>
+                <span class="tag">✔ Generate Quizzes</span>
+                <span class="tag">✔ Ask Questions</span>
+            </div>
+
+            <a href="#features" class="animated-btn">
+                <span class="btn-inner">🚀 Get Started</span>
+            </a>
+        </div>
+        <div class="hero-image">
+            <img src="robot.png" alt="3D Robot" class="robot-img">
+        </div>
+    </section>
+
+    <!-- Next Section -->
+    <section class="features" id="features">
+        <h2>Choose What You Need</h2>
+        <div class="feature-boxes">
+            <div class="box">
+                <h3>📚 Summarize Notes</h3>
+                <p>Convert long notes into short, easy-to-read summaries instantly.</p>
+            </div>
+            <div class="box">
+                <h3>📝 Generate Quizzes</h3>
+                <p>Create multiple-choice questions from your study material automatically.</p>
+            </div>
+            <div class="box">
+                <h3>💡 Ask Questions</h3>
+                <p>Get instant AI-powered answers to your academic questions anytime.</p>
+            </div>
+        </div>
+        <spline-viewer data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos="fade-down" data-aos-duration="1700" class="robot-3d" url="https://prod.spline.design/j5-DGzKbNFrbSJx8/scene.splinecode"></spline-viewer>
+    
+    </section>
+
+    <script>
+        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.40/build/spline-viewer.js"></script>
+
+        // Smooth scroll for "Get Started" button
+        document.querySelector('.animated-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
