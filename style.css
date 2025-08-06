@@ -382,6 +382,23 @@ background-color:gray;
 
 
 /* Modal Styles */
+
+
+.modal-content button {
+  background: linear-gradient(90deg, #a200ff, #ff4ecd);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
 .modal {
   display: none;
   position: fixed;
@@ -394,26 +411,65 @@ background-color:gray;
 .modal-content {
   background: #111;
   color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  margin: 10% auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  margin: 8% auto;
   text-align: center;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
 }
 
 .modal-content input {
   width: 90%;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
+  background: #222;
+  color: #fff;
+  font-size: 14px;
 }
 
-.modal-content button {
+.email-login-btn {
   background: linear-gradient(90deg, #a200ff, #ff4ecd);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
   cursor: pointer;
+}
+
+.divider {
+  margin: 15px 0;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.google-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.google-login-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.google-login-btn:hover {
+  background: #f4f4f4;
 }
