@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose What You Need</title>
+  <style>
+    /* Dark Theme */
+    body.dark-theme {
+    background: radial-gradient(circle at 30% 30%, #0d0017, #1a0036);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header {
+        padding: 15px 20px;
+    }
+
+    .back-btn {
+        background: linear-gradient(90deg, #9b5de5, #f15bb5);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        font-size: 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .back-btn:hover {
+        opacity: 0.8;
+    }
+
+    .features-section {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .section-title {
+        font-size: 3rem;
+        margin-bottom: 40px;
+        background: linear-gradient(90deg, #9b5de5, #f15bb5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        
+    }
+
+    .features-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 80px;
+        flex-wrap: wrap;
+    }
+
+    .feature-card {
+        background: #111;
+        color: white;
+        border-radius: 12px;
+        padding: 40px 30px;
+        text-align: center;
+        width: 320px; /* Increased width */
+        height: 220px; /* Increased height */
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 5px 30px rgba(161, 67, 255, 0.412);
+    }
+
+    .feature-card h2 {
+        font-size: 1.6rem; /* Bigger heading */
+        margin-bottom: 15px;
+        
+    }
+
+    .feature-card p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+        color: #bbb;
+    }
+
+    .feature-card button {
+        background: linear-gradient(90deg, #a200ff, #ff4ecd);
+        border: none;
+        padding: 12px 25px;
+        color: white;
+        font-size: 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        font-weight: 700;
+    }
+
+
+
+.feature-card button:hover {
+        background: transparent;
+        box-shadow: 0 0 15px  #a200ff;
+    }
+
+  </style>
+</head>
+<body class="dark-theme">
+    <header class="header">
+        <button class="back-btn" onclick="window.history.back()">← Back</button>
+    </header>
+
+    <section class="features-section">
+        <h1 class="section-title">Choose What You Need</h1>
+        <div class="features-container">
+            <div class="feature-card">
+                <h2>📊Exam Predictor</h2>
+                <p>Predict your exam performance based on previous years' question papers </p>
+                <button onclick="window.location.href='{{ url_for('summarize') }}'">Start Prediction</button>
+            </div>
+            <div class="feature-card">
+                <h2>📝 Generate Quizzes</h2>
+                <p>Create MCQs automatically from your content.</p>
+                <button onclick="window.location.href='{{ url_for('quiz') }}'">Generate Quiz</button>
+            </div>
+            <div class="feature-card">
+                <h2>💡 Ask Questions</h2>
+                <p>Get instant answers for any academic question.</p>
+                <button onclick="window.location.href='{{ url_for('ask') }}'">Ask Now</button>
+            </div>
+        </div>
+    </section>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } 
+    from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAr7SmLpvYM_N_-4N61C0Vf5Wxh5QZysHE",
+    authDomain: "ai-study-assistant-4a267.firebaseapp.com",
+    projectId: "ai-study-assistant-4a267",
+    storageBucket: "ai-study-assistant-4a267.appspot.com",
+    messagingSenderId: "536167254275",
+    appId: "1:536167254275:web:4be2d353ab4c7c9f2e4136"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  let currentUser = null;
+
+  // Track login state
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+  });
+
+  // Function to handle navigation
+  function navigateWithAuth(targetUrl) {
+    if (!currentUser) {
+      alert("⚠️ Please login before using this feature.");
+      // Redirect to homepage with login modal open
+      window.location.href = "/?login=true";
+    } else {
+      // ✅ Logged in → continue
+      window.location.href = targetUrl;
+    }
+  }
+
+  // Wire feature buttons
+  document.querySelectorAll(".feature-card button")[0].onclick = () => 
+      navigateWithAuth("/summarize");
+
+  document.querySelectorAll(".feature-card button")[1].onclick = () => 
+      navigateWithAuth("/quiz");
+
+  document.querySelectorAll(".feature-card button")[2].onclick = () => 
+      navigateWithAuth("/ask");
+</script>
+
+
+
+</body>
+</html>

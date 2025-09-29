@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Studiee — Ask Questions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Your CSS here (same as before) -->
+ <style>
+:root{
+  --bg: radial-gradient(circle at 30% 30%, #0d0017, #1a0036);
+  --card:#0e0b15;
+  --soft:#161024;
+  --text:#e9d8ff;
+  --muted:#bda8ff;
+  --accent1:#7b2ff7;
+  --accent2:#f107a3;
+  --ring: rgba(123,47,247,.45);
+}
+
+/* Page */
+html,body{
+  height:100%;
+}
+body{
+  margin:0;
+  font-family: "Poppins",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display:flex;
+  overflow:hidden;
+}
+
+/* Layout */
+.app{
+  display:flex;
+  width:100%;
+  height:100%;
+}
+
+/* Sidebar */
+.sidebar{
+  width:280px;
+  min-width:240px;
+  max-width:320px;
+  background: linear-gradient(180deg, rgba(15,7,28,.85), rgba(10,5,20,.7));
+  border-right: 1px solid rgba(123,47,247,.15);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  backdrop-filter: blur(8px);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+  user-select:none;
+}
+.brand .dot{
+  width:28px;height:28px;border-radius:8px;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  display:grid;place-items:center;
+  box-shadow: 0 0 24px rgba(241,7,163,.35);
+}
+.brand .name{
+  font-weight:700;font-size:18px;letter-spacing:.5px;
+}
+
+.new-chat{
+  border:0;
+  padding:12px 14px;
+  border-radius:14px;
+  font-weight:700;
+  color:#fff;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  box-shadow: 0 0 24px rgba(123,47,247,.35);
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.new-chat:hover{ transform: translateY(-1px); box-shadow: 0 0 34px rgba(123,47,247,.5); }
+
+.history{
+  margin-top:16px;
+  padding-right:6px;
+  overflow:auto;
+}
+.h-item{
+  padding:12px;
+  margin:8px 0;
+  border-radius:12px;
+  background: rgba(255,255,255,.03);
+  border:1px solid rgba(123,47,247,.15);
+  color:var(--muted);
+  cursor:pointer;
+  transition: border .15s ease, background .15s ease, transform .15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.h-item:hover{ background: rgba(255,255,255,.06); border-color: var(--ring); }
+.h-item.active{ border-color: var(--accent1); color:#fff; }
+
+/* Mobile sidebar */
+.menu-btn{
+  position: fixed;
+  z-index: 50;
+  top:14px; left:14px;
+  width:42px; height:42px;
+  border-radius:12px; border:0;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color:#fff; font-weight:900;
+  box-shadow: 0 0 20px rgba(241,7,163,.35);
+  display:none;
+}
+
+/* Chat area */
+.main{
+  flex:1; height:100%;
+  display:flex; flex-direction:column;
+  position:relative;
+}
+.header-space{ height:16px; } /* small breathing room */
+
+.chat{
+  flex:1;
+  overflow:auto;
+  padding:28px min(8vw,64px) 120px;  /* bottom padding for input bar */
+}
+.balloon{
+  max-width:min(780px, 82%);
+  padding:14px 16px;
+  border-radius:16px;
+  margin:10px 0;
+  line-height:1.6;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  animation: pop .18s ease-out forwards;
+}
+@keyframes pop{
+  from{ transform: translateY(6px) scale(.98); opacity:0 }
+  to{ transform: translateY(0) scale(1); opacity:1 }
+}
+.balloon.user{
+  margin-left:auto;
+  color:#fff;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+}
+.balloon.bot{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(123,47,247,.25);
+}
+
+/* Input bar (fixed) */
+.input-wrap{
+  position: absolute;
+  left:0; right:0; bottom:0;
+  padding:18px min(8vw,64px) 24px;
+  background: linear-gradient(180deg, rgba(10,5,20,0), rgba(10,5,20,.55) 30%, rgba(10,5,20,.75));
+  backdrop-filter: blur(6px);
+}
+.input{
+  display:flex; gap:10px; align-items:center;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(123,47,247,.35);
+  padding:10px;
+  border-radius:18px;
+  box-shadow: inset 0 0 0 1px rgba(123,47,247,.15);
+}
+.input input{
+  flex:1;
+  background: transparent;
+  border:0; outline:none;
+  color: var(--text);
+  font-size:16px; padding:12px 14px;
+}
+.send{
+  flex:0 0 54px; height:54px;
+  border-radius:16px; border:0;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color:#fff; font-size:20px; cursor:pointer;
+  display:grid; place-items:center;
+  box-shadow: 0 0 26px rgba(241,7,163,.4);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.send:hover{ transform: translateY(-1px); box-shadow: 0 0 34px rgba(241,7,163,.55); }
+.send:disabled{ opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+
+/* Markdown basics inside bot bubbles */
+.balloon.bot h1,.balloon.bot h2,.balloon.bot h3{ margin:.4em 0 .2em }
+.balloon.bot code{ background:#1b1430; padding:2px 6px; border-radius:6px }
+.balloon.bot pre{ background:#1b1430; padding:10px 12px; border-radius:10px; overflow:auto }
+
+/* Responsive */
+@media (max-width: 900px){
+  .sidebar{ position: fixed; z-index: 60; inset:0 auto 0 0; transform: translateX(-100%); }
+  .sidebar.open{ transform: translateX(0); }
+  .menu-btn{ display:block; }
+  .chat{ padding:24px 16px 110px; }
+  .balloon{ max-width: 92%; }
+}
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+<!-- Menu & App layout (same as before) -->
+<button class="menu-btn" id="menuBtn">≡</button>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="dot">•</div>
+      <div class="name">STUDIEE</div>
+    </div>
+    <button class="new-chat" id="newChatBtn">+ New Chat</button>
+    <div class="history" id="history"></div>
+  </aside>
+
+  <main class="main">
+    <div class="header-space"></div>
+    <section class="chat" id="chat"></section>
+
+    <div class="input-wrap">
+      <div class="input">
+        <input id="prompt" type="text" placeholder="Type your question..." autocomplete="off" />
+        <button id="sendBtn" class="send">➤</button>
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+  // -------------------- Firebase Config --------------------
+  const firebaseConfig = {
+    apiKey: "AIzaSyAr7SmLpvYM_N_-4N61C0Vf5Wxh5QZysHE",
+    authDomain: "ai-study-assistant-4a267.firebaseapp.com",
+    projectId: "ai-study-assistant-4a267",
+    storageBucket: "ai-study-assistant-4a267.appspot.com",
+    messagingSenderId: "536167254275",
+    appId: "1:536167254275:web:4be2d353ab4c7c9f2e4136"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  const API_BASE = "http://127.0.0.1:5000";
+  const $chat = document.getElementById("chat");
+  const $prompt = document.getElementById("prompt");
+  const $send = document.getElementById("sendBtn");
+  let chatHistory = [];
+
+  function addMessage(role, content) {
+    const b = document.createElement("div");
+    b.className = "balloon " + (role === "user" ? "user" : "bot");
+    b.innerHTML = content;
+    $chat.appendChild(b);
+    $chat.scrollTop = $chat.scrollHeight;
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  }
+
+  function markdownToHtml(md) {
+    let h = escapeHtml(md);
+    h = h.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    h = h.replace(/`([^`]+)`/g, "<code>$1</code>");
+    h = `<p>${h.replace(/\n/g, "<br>")}</p>`;
+    return h;
+  }
+
+  async function loadHistory(uid) {
+  try {
+    const user = firebase.auth().currentUser;
+    if (!user) throw new Error("Not logged in");
+
+    const idToken = await user.getIdToken(); 
+
+    const res = await fetch(`${API_BASE}/history`, {
+      headers: { "Authorization": "Bearer " + idToken }
+    });
+
+    if (!res.ok) throw new Error("Failed to load history");
+    const data = await res.json();
+    chatHistory = data || [];
+    $chat.innerHTML = "";
+    chatHistory.forEach(h => {
+      addMessage("user", h.message);
+      addMessage("bot", markdownToHtml(h.reply));
+    });
+  } catch (err) {
+    addMessage("bot", `<em>Error loading history:</em> ${escapeHtml(err.message)}`);
+  }
+}
+
+async function sendMessage(uid) {
+  const user = firebase.auth().currentUser;
+  if (!user) return alert("Please log in first.");
+
+  const idToken = await user.getIdToken(); 
+  const text = $prompt.value.trim();
+  if (!text) return;
+  $prompt.value = "";
+  $send.disabled = true;
+  addMessage("user", escapeHtml(text));
+
+  try {
+    const res = await fetch(`${API_BASE}/chat`, {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + idToken
+      },
+      body: JSON.stringify({ message: text })
+    });
+
+    if (!res.ok) {
+      const errData = await res.json();
+      throw new Error(errData.error || "Request failed");
+    }
+
+    const data = await res.json();
+    addMessage("bot", markdownToHtml(data.reply));
+    chatHistory.push({ message: text, reply: data.reply });
+
+  } catch (err) {
+    addMessage("bot", `<em>Something went wrong:</em> ${escapeHtml(err.message)}`);
+  } finally {
+    $send.disabled = false;
+  }
+}
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      alert("Please log in first.");
+      window.location.href = "index.html?login=true";
+      return;
+    }
+    const uid = user.uid;
+    loadHistory(uid);
+
+    $send.onclick = () => sendMessage(uid);
+    $prompt.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage(uid);
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+          <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+
+
+
+
+
+
+</head>
+<body>
+  <img class="image-gradient" src="{{ url_for('static', filename='images/gradient.png') }}" alt="Gradient">
+ 
+   <div class="layer-blur"></div>
+   <div class="container">
+
+
+<header class="header">
+    <div class="header-left">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Studiee Logo" class="logo1" data-aos="fade-down" data-aos-duration="1600">
+
+        <h1 class="site-name" data-aos="fade-down" data-aos-duration="1600">STUDIEE</h1>
+
+
+      
+
+    </div>
+
+    <div class="header-right">
+        <button onclick="openModal()" data-aos="fade-down" data-aos-duration="1600" class="btn-signing">LOGIN</button>
+    </div>
+
+    <!-- Login Modal -->
+<!-- Login Modal -->
+<!-- Login Modal -->
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <!-- Login Form -->
+    <div id="loginModalContent">
+      <h2>Login</h2>
+      <form id="emailLoginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required><br>
+        <input type="password" id="loginPassword" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+      </form>
+      <p><a href="#" id="forgotPasswordBtn">Forgot Password?</a></p>
+      <div class="divider">OR</div>
+      <button type="button" id="google-login" class="google-login-btn btn btn-danger">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"/> Continue with Google
+      </button>
+      <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+    </div>
+
+    <!-- Sign-Up Form -->
+    <div id="signUpModalContent" style="display:none;">
+      <h2>Sign Up</h2>
+      <form id="signUpForm">
+        <input type="email" id="signUpEmail" placeholder="Email" required><br>
+        <input type="password" id="signUpPassword" placeholder="Password" required><br>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="divider">OR</div>
+      <button type="button" id="googleSignUp" class="google-login-btn btn btn-danger">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"/> Sign Up with Google
+      </button>
+      <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+  </div>
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <main>
+    <div class="content">
+       
+
+
+
+            <h1 data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos="fade-down" data-aos-duration="1800">AI STUDY ASSISTANT</h1>
+        
+
+        <p data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos="fade-down" data-aos-duration="1700" class="description">Your personal smart assistant to make learning easy and fast.
+        Predict exams, generate quizzes, and get instant answers in one place.</p>
+
+
+             <div data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos="fade-down" data-aos-duration="1700" class="feature-tags">
+  <span class="tag1">✔ Exam Predictor</span>
+  <span class="tag1">✔ Generate Quizzes</span>
+  <span class="tag1">✔ Ask Questions</span>
+</div>
+
+            <div data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos="fade-down" data-aos-duration="1700" class="animated-btn">
+              
+          
+<button class="btn-inner" onclick="window.location.href='/features'">
+    🚀 Get Started >
+</button>
+
+</div>
+
+
+        </div>
+
+        <!-- Login Button -->
+
+
+
+     <spline-viewer data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos="fade-down" data-aos-duration="1700" class="robot-3d" url="https://prod.spline.design/j5-DGzKbNFrbSJx8/scene.splinecode"></spline-viewer>
+    
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+
+         <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.40/build/spline-viewer.js"></script>
+
+
+     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+  <script>
+    AOS.init();
+  </script>
+
+
+<script type="module">
+    // ✅ Import Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      sendPasswordResetEmail,
+      GoogleAuthProvider,
+      signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    // ✅ Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAr7SmLpvYM_N_-4N61C0Vf5Wxh5QZysHE",
+      authDomain: "ai-study-assistant-4a267.firebaseapp.com",
+      projectId: "ai-study-assistant-4a267",
+      storageBucket: "ai-study-assistant-4a267.appspot.com",
+      messagingSenderId: "536167254275",
+      appId: "1:536167254275:web:4be2d353ab4c7c9f2e4136"
+    };
+
+    // ✅ Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // ✅ Modal Functions
+    window.openModal = () => {
+      document.getElementById("loginModal").style.display = "flex";
+      showLogin(); // Default view: Login
+    };
+
+    window.closeModal = () => {
+      document.getElementById("loginModal").style.display = "none";
+    };
+
+    // ✅ Toggle Between Login and Sign-Up
+    window.showSignUp = () => {
+      document.getElementById("loginModalContent").style.display = "none";
+      document.getElementById("signUpModalContent").style.display = "block";
+    };
+
+    window.showLogin = () => {
+      document.getElementById("signUpModalContent").style.display = "none";
+      document.getElementById("loginModalContent").style.display = "block";
+    };
+
+    // ✅ Email Login with Auto-Create Account
+    document.getElementById("emailLoginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("✅ Login successful!");
+          window.location.href = "/features";   // 🔥 fixed
+        })
+        .catch((error) => {
+          if (error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") {
+            // Auto-create account
+            createUserWithEmailAndPassword(auth, email, password)
+              .then(() => {
+                alert("✅ Account created and logged in!");
+                window.location.href = "/features";   // 🔥 fixed
+              })
+              .catch(err => alert("❌ Error creating account: " + err.message));
+          } else {
+            alert("❌ Login Failed: " + error.message);
+          }
+        });
+    });
+
+    // ✅ Sign-Up Form
+    document.getElementById("signUpForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("signUpEmail").value;
+      const password = document.getElementById("signUpPassword").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("✅ Account created successfully!");
+          showLogin();
+        })
+        .catch(err => {
+          if (err.code === "auth/email-already-in-use") {
+            alert("⚠ Email already exists. Please login.");
+            showLogin();
+          } else {
+            alert("❌ Sign-Up Failed: " + err.message);
+          }
+        });
+    });
+
+    // ✅ Forgot Password
+    document.getElementById("forgotPasswordBtn").addEventListener("click", () => {
+      const email = document.getElementById("loginEmail").value;
+      if (!email) {
+        alert("⚠ Please enter your email in the login form first.");
+        return;
+      }
+      sendPasswordResetEmail(auth, email)
+        .then(() => alert("✅ Password reset email sent!"))
+        .catch(err => alert("❌ Error: " + err.message));
+    });
+
+    // ✅ Google Login
+    document.getElementById("google-login").addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then(result => {
+          alert(`✅ Welcome ${result.user.displayName}`);
+          window.location.href = "/features";   // 🔥 fixed
+        })
+        .catch(() => alert("❌ Google Sign-In Failed"));
+    });
+
+    // ✅ Google Sign-Up
+    document.getElementById("googleSignUp").addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then(result => {
+          alert(`✅ Account created for ${result.user.displayName}`);
+          window.location.href = "/features";   // 🔥 fixed
+        })
+        .catch(() => alert("❌ Google Sign-Up Failed"));
+    });
+
+    // ✅ Auto-open login modal if redirected
+    if (window.location.search.includes("login=true")) {
+      openModal();
+    }
+</script>
+
+
+</body>
+</html>
